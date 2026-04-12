@@ -1,79 +1,564 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>systemslibrarian.dev | Paul Clark</title>
-    <meta
-      name="description"
-      content="Paul Clark: Application Systems Analyst, MLIS, and builder at the intersection of library science, security engineering, and faith-driven development."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="bg-glow bg-glow-a" aria-hidden="true"></div>
-    <div class="bg-glow bg-glow-b" aria-hidden="true"></div>
+<head>
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paul Clark · Systems Librarian · Consulting</title>
+  <meta name="description" content="Paul Clark — Application Systems Analyst, AI-augmented developer, and library technology consultant with 30 years building systems that serve people." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300,50;0,9..144,400,50;0,9..144,500,50;1,9..144,300,50;1,9..144,400,50&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <header class="site-header">
-      <p class="eyebrow">systemslibrarian.dev</p>
-      <h1>
-        Building tools where<br />
-        <span>libraries, security, and purpose</span><br />
-        overlap.
-      </h1>
-      <p class="lead">
-        I am Paul Clark, an Application Systems Analyst and MLIS who builds practical
-        software for public service, strong security, and meaningful utility.
+    :root {
+      --bg: #071016;
+      --bg-soft: #0b1821;
+      --panel: rgba(8, 18, 25, 0.88);
+      --border: rgba(99, 128, 146, 0.2);
+      --border-strong: rgba(99, 128, 146, 0.34);
+      --text: #c8d9e5;
+      --text-dim: #7e98aa;
+      --text-hi: #f2f8fb;
+      --teal: #35d6bb;
+      --amber: #ffb84d;
+      --crimson: #ff6b7f;
+      --violet: #9f88ff;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Fraunces', Georgia, serif;
+      --shadow: 0 24px 80px rgba(0,0,0,0.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top center, rgba(53,214,187,0.10), transparent 36%),
+        radial-gradient(circle at 82% 18%, rgba(159,136,255,0.07), transparent 28%),
+        linear-gradient(180deg, #081016 0%, #071016 60%, #060d13 100%);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(38,62,78,0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(38,62,78,0.18) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.08));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { position: relative; z-index: 1; width: min(1100px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* NAV */
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,16,22,0.90);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 16px; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; }
+    .nav-mark {
+      width: 34px; height: 34px;
+      border: 1px solid var(--border-strong);
+      display: grid; place-items: center;
+      color: var(--teal); font-size: 10px; font-weight: 500; letter-spacing: 0.04em;
+      background: rgba(9,18,24,0.9);
+      box-shadow: inset 0 0 0 1px rgba(53,214,187,0.07);
+    }
+    .nav-title { display: flex; flex-direction: column; }
+    .nav-title strong { color: var(--text-hi); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-title span { color: var(--text-dim); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .nav-link {
+      padding: 8px 12px; font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--text-dim); border: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-link:hover { color: var(--text-hi); border-color: var(--border-strong); }
+    .nav-cta {
+      padding: 9px 16px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--bg); background: var(--teal); border: 1px solid rgba(53,214,187,0.8);
+      font-family: var(--mono); cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: #53e2ca; transform: translateY(-1px); }
+    .theme-btn {
+      width: 34px; height: 34px; border: 1px solid var(--border-strong);
+      background: rgba(8,17,24,0.74); color: var(--text-dim); cursor: pointer;
+      font-size: 15px; display: grid; place-items: center; padding: 0;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .theme-btn:hover { border-color: rgba(242,248,251,0.4); color: var(--text-hi); }
+
+    /* HERO */
+    .hero { padding: 80px 0 64px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--amber); text-transform: uppercase; letter-spacing: 0.18em;
+      font-size: 11px; margin-bottom: 26px;
+    }
+    .eyebrow::before { content: ''; width: 32px; height: 1px; background: currentColor; }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6.5vw, 5.6rem);
+      font-weight: 400; line-height: 0.97;
+      color: var(--text-hi); letter-spacing: -0.04em;
+      max-width: 15ch; margin-bottom: 30px;
+    }
+    .hero h1 em { color: var(--teal); font-style: italic; }
+    .hero-body { max-width: 56ch; color: var(--text); font-size: 14px; line-height: 1.85; margin-bottom: 38px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid var(--border-strong);
+      transition: transform 0.2s, border-color 0.2s, color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--teal); color: var(--bg); border-color: rgba(53,214,187,0.8); box-shadow: 0 10px 30px rgba(53,214,187,0.15); }
+    .btn-primary:hover { background: #53e2ca; transform: translateY(-2px); }
+    .btn-secondary { background: rgba(8,17,24,0.74); color: var(--text-dim); }
+    .btn-secondary:hover { color: var(--text-hi); border-color: rgba(242,248,251,0.4); transform: translateY(-1px); }
+
+    /* CRED BAR */
+    .cred-bar { padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 88px; }
+    .cred-inner { display: flex; flex-wrap: wrap; }
+    .cred-item { padding: 0 32px; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px; }
+    .cred-item:first-child { padding-left: 0; }
+    .cred-item:last-child { border-right: none; }
+    .cred-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
+    .cred-value { font-family: var(--serif); font-size: 1.05rem; color: var(--text-hi); font-weight: 400; }
+
+    /* SECTIONS */
+    section { padding: 0 0 88px; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--teal); font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .section-label::before { content: ''; width: 22px; height: 1px; background: currentColor; }
+    .section-title { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; color: var(--text-hi); letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 14px; }
+    .section-copy { color: var(--text); font-size: 13.5px; line-height: 1.85; max-width: 60ch; margin-bottom: 44px; }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .service-card {
+      border: 1px solid var(--border); background: var(--panel);
+      backdrop-filter: blur(12px); padding: 28px;
+      position: relative; overflow: hidden;
+      transition: border-color 0.24s, transform 0.24s;
+    }
+    .service-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent, var(--teal)), transparent 70%);
+    }
+    .service-card:hover { border-color: rgba(242,248,251,0.2); transform: translateY(-3px); }
+    .service-icon { font-size: 20px; margin-bottom: 14px; display: block; }
+    .service-title { font-family: var(--serif); font-size: 1.35rem; color: var(--text-hi); margin-bottom: 10px; line-height: 1.1; }
+    .service-copy { font-size: 12.5px; color: var(--text); line-height: 1.75; }
+
+    /* WORK */
+    .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .work-card {
+      border: 1px solid var(--border); background: rgba(9,18,24,0.9);
+      padding: 28px; position: relative; overflow: hidden;
+      transition: border-color 0.24s, transform 0.24s;
+    }
+    .work-card:hover { border-color: rgba(242,248,251,0.2); transform: translateY(-2px); }
+    .work-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent, var(--teal)), transparent 70%);
+    }
+    .work-kicker { font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .work-kicker::before { content: ''; width: 14px; height: 1px; background: currentColor; }
+    .work-title { font-family: var(--serif); font-size: 1.45rem; color: var(--text-hi); margin-bottom: 10px; line-height: 1.1; }
+    .work-copy { font-size: 12.5px; color: var(--text); line-height: 1.75; margin-bottom: 18px; }
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip { padding: 3px 8px; border: 1px solid var(--border-strong); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); background: rgba(8,17,24,0.78); }
+
+    /* ABOUT */
+    .about-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: start; }
+    .about-text p { color: var(--text); font-size: 13.5px; line-height: 1.88; margin-bottom: 16px; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--text-hi); }
+    .awards { display: flex; flex-direction: column; gap: 10px; }
+    .award-item { border: 1px solid var(--border); background: var(--panel); padding: 18px 20px; position: relative; overflow: hidden; }
+    .award-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--accent, var(--teal)); }
+    .award-year { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+    .award-name { font-family: var(--serif); font-size: 1rem; color: var(--text-hi); line-height: 1.2; }
+
+    /* CONTACT */
+    .contact-box {
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, rgba(53,214,187,0.06), transparent 40%), var(--panel);
+      backdrop-filter: blur(12px);
+      padding: 44px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .contact-title { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--text-hi); letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 14px; }
+    .contact-copy { color: var(--text); font-size: 13.5px; line-height: 1.8; }
+    .contact-links { display: flex; flex-direction: column; gap: 10px; }
+    .contact-link { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border: 1px solid var(--border); background: rgba(9,18,24,0.8); transition: border-color 0.2s, transform 0.2s; }
+    .contact-link:hover { border-color: var(--teal); transform: translateX(4px); }
+    .contact-link-icon { font-size: 18px; flex-shrink: 0; }
+    .contact-link-body { display: flex; flex-direction: column; gap: 2px; }
+    .contact-link-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+    .contact-link-value { font-size: 13px; color: var(--text-hi); }
+
+    /* FOOTER */
+    .site-footer { padding: 0 0 48px; }
+    .footer-quote {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(11,24,33,0.92), rgba(8,17,24,0.82));
+      backdrop-filter: blur(12px);
+      padding: 28px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+    }
+    .footer-quote blockquote { font-family: var(--serif); color: var(--text-hi); font-size: 1.3rem; line-height: 1.4; max-width: 34ch; }
+    .footer-quote cite { color: var(--teal); font-style: normal; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+
+    /* LIGHT */
+    html.light {
+      --bg: #f4f6f8; --bg-soft: #eaecf0; --panel: rgba(255,255,255,0.92);
+      --border: rgba(60,80,100,0.16); --border-strong: rgba(60,80,100,0.28);
+      --text: #3a4a58; --text-dim: #6b7f8e; --text-hi: #1a2530;
+      --teal: #1aab94; --amber: #c87a00; --crimson: #d44058; --violet: #6b5ce7;
+      --shadow: 0 24px 80px rgba(0,0,0,0.08);
+    }
+    html.light body { background: linear-gradient(180deg, #f4f6f8 0%, #eef1f4 50%, #e8ecf0 100%); }
+    html.light body::before { background-image: linear-gradient(rgba(60,80,100,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(60,80,100,0.07) 1px, transparent 1px); }
+    html.light .site-nav { background: rgba(244,246,248,0.94); }
+    html.light .theme-btn { background: rgba(255,255,255,0.6); }
+    html.light .nav-cta { color: #fff; }
+    html.light .nav-cta:hover { color: #fff; }
+    html.light .service-card, html.light .award-item, html.light .contact-box, html.light .footer-quote { background: rgba(255,255,255,0.92); }
+    html.light .work-card { background: rgba(255,255,255,0.88); }
+    html.light .chip { background: rgba(60,80,100,0.06); }
+    html.light .contact-link { background: rgba(255,255,255,0.8); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .hero { animation: fadeUp 0.6s ease both; }
+    .cred-bar { animation: fadeUp 0.6s ease 0.1s both; }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .about-layout { grid-template-columns: 1fr; gap: 36px; }
+      .contact-box { grid-template-columns: 1fr; padding: 28px; gap: 28px; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .work-grid { grid-template-columns: 1fr; }
+      .cred-item { padding: 0 0 14px; border-right: none; border-bottom: 1px solid var(--border); }
+      .cred-item:last-child { border-bottom: none; padding-bottom: 0; }
+      .nav-link { display: none; }
+      .cred-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <div class="nav-brand">
+          <div class="nav-mark">PC</div>
+          <div class="nav-title">
+            <strong>Paul Clark</strong>
+            <span>systemslibrarian.dev</span>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a class="nav-link" href="#services">Services</a>
+          <a class="nav-link" href="#work">Work</a>
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="https://systemslibrarian.github.io/crypto-lab/" target="_blank" rel="noopener">Crypto Lab</a>
+          <a class="nav-link" href="https://github.com/systemslibrarian" target="_blank" rel="noopener">GitHub</a>
+          <a class="nav-cta" href="#contact">Get in Touch</a>
+          <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
+            <span id="theme-icon">☀</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Available for consulting</div>
+      <h1>Building tools where <em>libraries, security,</em> and purpose overlap.</h1>
+      <p class="hero-body">
+        I'm Paul Clark — Application Systems Analyst, MLIS, and AI-augmented developer with 30 years
+        building production systems for public service. I help libraries and government agencies ship
+        secure, practical software that the people depending on it can trust.
       </p>
-      <a class="cta" href="https://github.com/systemslibrarian">View GitHub</a>
-    </header>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Start a Conversation</a>
+        <a class="btn btn-secondary" href="#work">See the Work</a>
+      </div>
+    </div>
+  </section>
 
-    <main>
-      <section>
-        <h2>Focus Areas</h2>
-        <ul class="card-grid">
-          <li>
-            <h3>Cryptography</h3>
-            <p>Applied demos, threshold storage, and practical browser crypto tooling.</p>
-          </li>
-          <li>
-            <h3>Library Systems</h3>
-            <p>Internal tools, accessibility, and systems that help teams serve people well.</p>
-          </li>
-          <li>
-            <h3>Faith Projects</h3>
-            <p>Scripture-centered apps designed for clarity, usefulness, and encouragement.</p>
-          </li>
-        </ul>
-      </section>
+  <div class="cred-bar">
+    <div class="wrap">
+      <div class="cred-inner">
+        <div class="cred-item">
+          <span class="cred-label">Experience</span>
+          <span class="cred-value">30 Years Library IT</span>
+        </div>
+        <div class="cred-item">
+          <span class="cred-label">2011</span>
+          <span class="cred-value">FL Librarian of the Year</span>
+        </div>
+        <div class="cred-item">
+          <span class="cred-label">2012</span>
+          <span class="cred-value">Library Journal Top 50 Global</span>
+        </div>
+        <div class="cred-item">
+          <span class="cred-label">Education</span>
+          <span class="cred-value">MLIS · Florida State University</span>
+        </div>
+        <div class="cred-item">
+          <span class="cred-label">Portfolio</span>
+          <span class="cred-value">74 Public Repos · 48 Live Demos</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <section>
-        <h2>Featured Projects</h2>
-        <ul class="project-list">
-          <li>
-            <a href="https://github.com/systemslibrarian/crypto-compare">crypto-compare</a>
-            <p>Cataloging cryptographic algorithm categories with linked demos.</p>
-          </li>
-          <li>
-            <a href="https://ciphermuseum.com">cipher-museum</a>
-            <p>Historical cryptography experience spanning ciphers across centuries.</p>
-          </li>
-          <li>
-            <a href="https://hideinheart.com">HideInHeart</a>
-            <p>Scripture memorization app with categorized verses and guided review.</p>
-          </li>
-        </ul>
-      </section>
-    </main>
+  <section id="services">
+    <div class="wrap">
+      <div class="section-label">Services</div>
+      <h2 class="section-title">What I build</h2>
+      <p class="section-copy">
+        I bring together 30 years of library domain knowledge, production-grade engineering, and
+        AI-augmented development to ship systems your team can depend on.
+      </p>
+      <div class="services-grid">
+        <div class="service-card" style="--accent: var(--teal);">
+          <span class="service-icon">🔒</span>
+          <div class="service-title">Library Systems Integration</div>
+          <p class="service-copy">ILS integrations, access control workflows, patron registration pipelines, and secure data handling. Built for LCPL in production — I know what breaks and what holds.</p>
+        </div>
+        <div class="service-card" style="--accent: var(--amber);">
+          <span class="service-icon">🤖</span>
+          <div class="service-title">AI-Augmented Development</div>
+          <p class="service-copy">Using Claude and structured prompt engineering to ship at 3–5× the pace of traditional development. Architecture and security judgment stay human. Tedious execution gets automated.</p>
+        </div>
+        <div class="service-card" style="--accent: var(--violet);">
+          <span class="service-icon">🛡️</span>
+          <div class="service-title">Security Engineering</div>
+          <p class="service-copy">Applied cryptography, AES-256-GCM, post-quantum primitives, threat modeling, and fail-closed design for public-sector and compliance-sensitive environments.</p>
+        </div>
+        <div class="service-card" style="--accent: var(--crimson);">
+          <span class="service-icon">🔗</span>
+          <div class="service-title">API & Workflow Automation</div>
+          <p class="service-copy">LibCal, SirsiDynix Symphony, C•CURE 9000, ArcGIS, and custom webhook architectures. I specialize in connecting systems that weren't designed to talk to each other.</p>
+        </div>
+        <div class="service-card" style="--accent: var(--teal);">
+          <span class="service-icon">📊</span>
+          <div class="service-title">Data Analysis & Reporting</div>
+          <p class="service-copy">Library analytics, IMLS data pipelines, operational dashboards, and public-sector visualization. Google Data Analytics certified. I turn library data into things decision-makers can act on.</p>
+        </div>
+        <div class="service-card" style="--accent: var(--amber);">
+          <span class="service-icon">💡</span>
+          <div class="service-title">Systems Analysis & Advisory</div>
+          <p class="service-copy">Integration architecture, vendor evaluation, and technology strategy for public libraries and county IT. I've been on the inside — I understand how these decisions actually get made.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <p>Whatever you do, do it all for the glory of God. 1 Corinthians 10:31</p>
-    </footer>
-  </body>
+  <section id="work">
+    <div class="wrap">
+      <div class="section-label">Selected Work</div>
+      <h2 class="section-title">Production systems &amp; public projects</h2>
+      <p class="section-copy">
+        A mix of internal production systems built for LCPL and public portfolio work demonstrating
+        applied cryptography, browser security, and library technology.
+      </p>
+      <div class="work-grid">
+        <div class="work-card" style="--accent: var(--teal);">
+          <div class="work-kicker">Production · LCPL</div>
+          <div class="work-title">Secure Patron Registration Platform</div>
+          <p class="work-copy">ASP.NET Core MVC platform handling online library card registration with encrypted document upload, ArcGIS address validation, ClamAV malware scanning, and automated patron creation via SirsiDynix Symphony Web Services. 8-layer security pipeline. Deployed in production.</p>
+          <div class="chips">
+            <span class="chip">ASP.NET Core</span>
+            <span class="chip">AES-256-GCM</span>
+            <span class="chip">SirsiDynix</span>
+            <span class="chip">ArcGIS</span>
+            <span class="chip">ClamAV</span>
+          </div>
+        </div>
+        <div class="work-card" style="--accent: var(--amber);">
+          <div class="work-kicker">Production · LCPL</div>
+          <div class="work-title">SwipeWatcher — Access Control Monitor</div>
+          <p class="work-copy">Real-time C•CURE 9000 door event monitor via Victor Web Services / SignalR. HMAC-signed webhook pipeline, Pushover and email alerting, OpenTelemetry tracing, Prometheus metrics, Kubernetes/Helm deployment. Zero missed events in production.</p>
+          <div class="chips">
+            <span class="chip">C#/.NET 8</span>
+            <span class="chip">SignalR</span>
+            <span class="chip">HMAC</span>
+            <span class="chip">Kubernetes</span>
+            <span class="chip">OpenTelemetry</span>
+          </div>
+        </div>
+        <div class="work-card" style="--accent: var(--violet);">
+          <div class="work-kicker">Production · LCPL · Award-Winning</div>
+          <div class="work-title">LibCal → C•CURE 9000 Integration</div>
+          <p class="work-copy">Event-driven integration that automatically provisions door access clearances from LibCal meeting room reservations. Patrons unlock rooms with their library cards — no manual staff steps. Recognized with the I² Innovator/Inspirator Award.</p>
+          <div class="chips">
+            <span class="chip">C#</span>
+            <span class="chip">LibCal API</span>
+            <span class="chip">C•CURE 9000</span>
+            <span class="chip">Victor Web Services</span>
+          </div>
+        </div>
+        <div class="work-card" style="--accent: var(--teal);">
+          <div class="work-kicker">Public Portfolio</div>
+          <div class="work-title">Crypto Lab — 48 Live Browser Demos</div>
+          <p class="work-copy">Browser-based cryptography suite spanning 2,500 years of history to NIST FIPS 2024 post-quantum standards. No backends, no accounts. Covers symmetric, asymmetric, ZK proofs, homomorphic encryption, threshold signatures, and historical ciphers.</p>
+          <div class="chips">
+            <span class="chip">TypeScript</span>
+            <span class="chip">Rust/WASM</span>
+            <span class="chip">Post-Quantum</span>
+            <span class="chip">48 Live Demos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="about-layout">
+        <div class="about-text">
+          <div class="section-label">About</div>
+          <h2 class="section-title">30 years building systems that serve people</h2>
+          <p>I'm an Application Systems Analyst at Leon County Public Library in Tallahassee, FL, where I've spent three decades turning operational complexity into systems that library staff and patrons can actually depend on.</p>
+          <p>My work sits at the intersection of <strong>library domain expertise, production engineering, and applied security</strong> — a combination that's genuinely rare. I understand both the technical architecture and the human workflows that depend on it.</p>
+          <p>I use AI as a true development partner — Claude and GitHub Copilot let me ship at a pace that wasn't possible before, while keeping architecture decisions and security judgment firmly human. The 74 public repos and 48 live demos are the proof of concept.</p>
+          <p>Everything I build is anchored by the belief that <strong>technology is a gift meant to serve people well</strong> — and that the standard for "good enough" is whether the person depending on it can trust it.</p>
+        </div>
+        <div>
+          <div class="section-label" style="margin-bottom: 20px;">Recognition</div>
+          <div class="awards">
+            <div class="award-item" style="--accent: var(--amber);">
+              <div class="award-year">2011</div>
+              <div class="award-name">Florida Librarian of the Year</div>
+            </div>
+            <div class="award-item" style="--accent: var(--teal);">
+              <div class="award-year">2012</div>
+              <div class="award-name">Library Journal — Top 50 Global Library Leaders</div>
+            </div>
+            <div class="award-item" style="--accent: var(--violet);">
+              <div class="award-year">LCPL</div>
+              <div class="award-name">I² Innovator / Inspirator Award</div>
+            </div>
+            <div class="award-item" style="--accent: var(--teal);">
+              <div class="award-year">FSU</div>
+              <div class="award-name">MLIS · Florida State University</div>
+            </div>
+            <div class="award-item" style="--accent: var(--amber);">
+              <div class="award-year">Google</div>
+              <div class="award-name">Google Data Analytics Certification</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-box">
+        <div>
+          <div class="section-label">Contact</div>
+          <h2 class="contact-title">Let's build something worth building.</h2>
+          <p class="contact-copy">
+            If you're a library, county IT department, or public-sector organization with a systems
+            problem — or a developer looking to collaborate on something meaningful — I'd love to hear from you.
+          </p>
+        </div>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:paul@systemslibrarian.dev">
+            <span class="contact-link-icon">✉</span>
+            <div class="contact-link-body">
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-value">paul@systemslibrarian.dev</span>
+            </div>
+          </a>
+          <a class="contact-link" href="https://github.com/systemslibrarian" target="_blank" rel="noopener">
+            <span class="contact-link-icon">⌥</span>
+            <div class="contact-link-body">
+              <span class="contact-link-label">GitHub</span>
+              <span class="contact-link-value">github.com/systemslibrarian</span>
+            </div>
+          </a>
+          <a class="contact-link" href="https://www.linkedin.com/in/systemslibrarian" target="_blank" rel="noopener">
+            <span class="contact-link-icon">◈</span>
+            <div class="contact-link-body">
+              <span class="contact-link-label">LinkedIn</span>
+              <span class="contact-link-value">linkedin.com/in/systemslibrarian</span>
+            </div>
+          </a>
+          <a class="contact-link" href="https://systemslibrarian.github.io/crypto-lab/" target="_blank" rel="noopener">
+            <span class="contact-link-icon">🔐</span>
+            <div class="contact-link-body">
+              <span class="contact-link-label">Portfolio</span>
+              <span class="contact-link-value">Crypto Lab — 48 Live Demos</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-quote">
+        <blockquote>So whether you eat or drink or whatever you do, do it all for the glory of God.</blockquote>
+        <cite>1 Corinthians 10:31</cite>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var html = document.documentElement;
+      var btn  = document.getElementById('theme-toggle');
+      var icon = document.getElementById('theme-icon');
+      function apply(theme) {
+        if (theme === 'light') { html.classList.add('light'); icon.textContent = '☽'; }
+        else { html.classList.remove('light'); icon.textContent = '☀'; }
+      }
+      apply(localStorage.getItem('theme') || 'dark');
+      btn.addEventListener('click', function () {
+        var next = html.classList.contains('light') ? 'dark' : 'light';
+        localStorage.setItem('theme', next);
+        apply(next);
+      });
+    })();
+  </script>
+
+</body>
 </html>
