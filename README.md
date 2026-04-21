@@ -15,7 +15,7 @@ Recommended projects to explore my work:
 
 🔐 **[Meow Decoder](https://github.com/systemslibrarian/meow-decoder)** — Secure optical air-gap file transfer via animated QR-code GIFs. AES-256-GCM + Argon2id + ML-KEM-1024 + fountain codes. Explicit threat model, fail-closed design.
 
-🧪 **[Crypto Lab](https://crypto-lab.systemslibrarian.dev** — 67 browser-based cryptography demos spanning deniable encryption, post-quantum, zero-knowledge proofs, FHE, and more. Real primitives. No backends. Just the math.
+🧪 **[Crypto Lab](https://crypto-lab.systemslibrarian.dev** — 99 browser-based cryptography demos spanning deniable encryption, post-quantum, zero-knowledge proofs, FHE, and more. Real primitives. No backends. Just the math.
 
 ✝️ **[Scripture Journey](https://scripturejourney.com)** — A Christ-centered PWA mapping 200+ Old Testament prophecies to their New Testament fulfillments.
 
